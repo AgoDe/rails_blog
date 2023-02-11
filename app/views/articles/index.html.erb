@@ -1,0 +1,52 @@
+<div class="col-12">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>All Articles</h1>
+
+        <div class="">
+            <a href="/articles/new" class="btn btn-primary">
+                New Article
+            </a>        
+        </div>
+        
+    </div>
+    
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @articles.each do |article| %>
+            <tr>
+                <th scope="row">
+                    <%= article.id %>
+                </th>
+                <td><%= article.title %></td>
+                <td class="d-flex justify-content-around">
+                   
+                    <a href="/articles/<%= article.id %>" class="">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
+                    
+                    <a href="/articles/<%= article.id %>/edit" class="">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    
+                    <a href="" class="">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                    
+                </td>
+            </tr>
+            <% end %>
+           
+        </tbody>
+    </table>
+</div>
+
