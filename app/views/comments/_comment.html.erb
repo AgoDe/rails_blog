@@ -1,0 +1,11 @@
+<div class="card mb-2"">
+  <div class="card-body">
+    <h5 class="card-title"><%= comment.title %></h5>
+    <p class="card-text">
+      <%= comment.body %>
+    </p>
+  </div>
+  <div class="card-footer bg-transparent text-secondary fst-italic">
+    <%= comment.created_at.strftime('%d/%m/%Y  %H:%m') %>
+  </div>
+</div>

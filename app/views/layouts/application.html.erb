@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -28,9 +27,18 @@
                   Articles
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
+              <% if user_signed_in? %>
+                <li>
+                  <%= button_to "Logout", logout_path, method: :delete, class: 'btn', form_class: 'd-inline-block' %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/new">Registration</a>
+                </li>
+              <% end %>
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -40,14 +48,11 @@
         </div>
       </nav>
     </header>
-
     <div class="container my-5">
       <div class="row">
-          <%= yield %>
+        <%= yield %>
       </div>
     </div>
-    
-
     <footer class="container mt-5">
       <div class="row">
         <div class="col-12">
@@ -57,4 +62,3 @@
     </footer>
   </body>
 </html>
-

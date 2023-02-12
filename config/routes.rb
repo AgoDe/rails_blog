@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get 'login/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -8,9 +10,18 @@ Rails.application.routes.draw do
   # get "/articles",      to: "articles#index" 
   # get "/articles/:id",  to: "articles#show"
 
+  get     "/login",   to: "login#new"
+  post    "/login",   to: "login#create"
+  delete  "/logout",  to: "login#destroy"
 
 # per create le rotte delle CRUD di un model
-  resources :articles
+
+  
+  resources :users 
+    resources :articles do
+      resources :comments
+    end
+  
 
 
   
