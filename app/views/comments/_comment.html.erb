@@ -5,7 +5,10 @@
       <%= comment.body %>
     </p>
   </div>
-  <div class="card-footer bg-transparent text-secondary fst-italic">
+  <div class="card-footer bg-transparent text-secondary fst-italic d-flex justify-content-between">
+    <div>
+      <%= comment.user.username %>
+    </div>
     <%= comment.created_at.strftime('%d/%m/%Y  %H:%m') %>
   </div>
 </div>

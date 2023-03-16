@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a project I made for learning Ruby language and Ruby on Rails 
 
-Things you may want to cover:
 
-* Ruby version
+## RUBY TIPS
 
-* System dependencies
+$ print "Hello World"     //  print a simple string
+$ puts "Hello World"      // print a simple string, but put the next command in a new line
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

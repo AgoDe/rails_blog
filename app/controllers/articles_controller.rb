@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
 
   def index
     @articles = Article.all
@@ -49,5 +51,12 @@ class ArticlesController < ApplicationController
   private
     def article_params
       params.require(:article).permit(:title, :body)
+    end
+
+    def correct_user
+      @article = Article.find_by(id: params[:id])
+      unless current_user?(@article.user)
+        redirect_to user_path(current_user)
+      end
     end
 end

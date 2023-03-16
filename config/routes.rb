@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations'}
+
   get 'login/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -9,10 +10,6 @@ Rails.application.routes.draw do
 # come definire le singole rotte
   # get "/articles",      to: "articles#index" 
   # get "/articles/:id",  to: "articles#show"
-
-  get     "/login",   to: "login#new"
-  post    "/login",   to: "login#create"
-  delete  "/logout",  to: "login#destroy"
 
 # per create le rotte delle CRUD di un model
 

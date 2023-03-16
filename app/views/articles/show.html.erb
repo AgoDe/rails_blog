@@ -28,6 +28,15 @@
           <%= @article.body %>
         </p>
         <hr>
+        <div class="d-flex justify-content-between">
+          <div>
+            Writen by <em><%= @article.user.username %></em>
+          </div>
+          <div class="fst-italic">
+            <%= @article.created_at.strftime('%d/%m/%Y  %H:%m') %>
+          </div>
+        </div>
+        <hr>
         <h3 class="mt-5 mb-3">All comments:</h3>
         <%= render @article.comments %>
       </div>
