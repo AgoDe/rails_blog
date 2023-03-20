@@ -26,3 +26,8 @@ end
 
 # comando per vedere tutte le rotte
 # bin/rails routes
+
+
+# URL helper
+
+# get "/article/:id", to: "aeticles#show", as: :article

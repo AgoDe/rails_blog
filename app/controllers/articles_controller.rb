@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :body)
     end
 
-    def correct_user
+    def currect_user
       @article = Article.find_by(id: params[:id])
       unless current_user?(@article.user)
         redirect_to user_path(current_user)

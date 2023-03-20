@@ -28,15 +28,15 @@ _to run a method_
 
 ``` 
 def sayhi(param)
-
-
+    puts "say #{param}"
 end
 
 ```
 _define a method with a parameter_  
 
 
-``` sayhi(param) ``` _to run a method with paramameter_  
+``` sayhi(param) ``` 
+_to run a method with paramameter_  
 
 ``` 
 def sayhi(name="default")
@@ -169,7 +169,46 @@ class Book
         @pages = pages
     end
 
+    def method
+        # code
+    end
+
 end
 
 book1 = Book.new("Harry potter", "JK Rowling", 400)
+book1.method (call the class method)
 ```
+
+_define the inizialize and an object method_  
+
+```
+class vehicle
+    # code
+end
+
+class car < vehicle
+    # code
+end
+```
+_define the inheritance of the class_  
+
+### Module
+
+``` 
+module Tools
+    # code
+end
+```
+_define a module_  
+
+```
+require_relative "path/tools.rb"
+iclude Tools
+``` 
+_use module_  
+
+
+
+
+
+
