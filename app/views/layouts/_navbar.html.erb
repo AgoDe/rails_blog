@@ -27,6 +27,9 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">My articles</a></li>
               <li><a class="dropdown-item" href="#">My comments</a></li>
+              <li>
+                <%= link_to 'Update Account', edit_user_registration_path(current_user.id), class: "dropdown-item" %>
+              </link_to>
               <li class="">
                 <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'btn', form_class: 'd-inline-block' %>
               </li>

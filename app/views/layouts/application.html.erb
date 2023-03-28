@@ -11,7 +11,13 @@
   </head>
   <body>
     <header class="container">
-      <%= render 'shared/navbar' %>
+      <% flash.each do |name, message|  %>
+        <div class="alert alert-dismissible fade show alert-<%= name == 'alert' ? 'danger' : 'success' %>" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+      <%= render 'layouts/navbar' %>
     </header>
     <div class="container my-5">
       <div class="row">

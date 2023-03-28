@@ -38,12 +38,17 @@
         </div>
         <hr>
         <h3 class="mt-5 mb-3">All comments:</h3>
-        <%= render @article.comments %>
+        <div id="comments">
+          <%= render @article.comments %>
+        </div>
       </div>
       <%# add comments %>
       <div class="col-12 col-lg-3 ps-4">
-        <h3>Add a comment:</h2>
-        <%= render 'comments/form' %>
+        <%= turbo_frame_tag "new_comment" do %>
+          <%= link_to "Write a comment", new_article_comment_path(@article.id), class: "btn btn-primary"  %>
+        <% end %>
+        <%= turbo_frame_tag "edit_comment" do %>
+        <% end %>
       </div>
     </div>
   </div>

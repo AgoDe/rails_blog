@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations'}
 
-  get 'login/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "articles#index"
+  root "pages#home"
 
 # come definire le singole rotte
   # get "/articles",      to: "articles#index" 
@@ -14,10 +13,10 @@ Rails.application.routes.draw do
 # per create le rotte delle CRUD di un model
 
   
-  resources :users 
-    resources :articles do
-      resources :comments
-    end
+  resources :users, only: [:index, :show]
+  resources :articles do
+    resources :comments
+  end
   
 
 
@@ -30,4 +29,4 @@ end
 
 # URL helper
 
-# get "/article/:id", to: "aeticles#show", as: :article
+# get "/article/:id", to: "articles#show", as: :article

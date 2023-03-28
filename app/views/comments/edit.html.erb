@@ -1,0 +1,16 @@
+<%= turbo_frame_tag @comment do %>
+  <h2>Edit a comment</h2>
+  <%= form_with(id: "comment_form", model: [ @article, @comment ]) do |form| %>
+    <p>
+      <%= form.label :title, class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </p>
+    <p>
+      <%= form.label :body, class: 'form-label' %>
+      <%= form.text_area :body, class: 'form-control' %>
+    </p>
+    <p>
+      <%= form.submit "Edit comment", class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+<% end %>

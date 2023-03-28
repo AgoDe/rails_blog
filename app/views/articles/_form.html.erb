@@ -2,19 +2,27 @@
   <div class="mb-3">
     <%= form.label :title, class: 'form-label' %><br>
     <%= form.text_field :title, class: 'form-control' %>
-    <% @article.errors.full_messages_for(:title).each do |message| %>
-      <div class="form-text"><%= message %></div>
-    <% end %>
   </div>
   <div class="mb-3">
     <%= form.label :body, class: 'form-label' %><br>
     <%= form.text_area :body, class: 'form-control' %><br>
-    <% @article.errors.full_messages_for(:body).each do |message| %>
-      <div class="form-text"><%= message %></div>
+  </div>
+  <div class="">
+    <%  if @article.errors.any? %>
+      <h4 class="text-danger">
+        The following errors prevented the article from being saved
+      </h4>
+      <ul class="">
+        <% @article.errors.full_messages.each do |message| %>
+          <li class="text-danger">
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
   </div>
-  <div class="mb-3">
-    <%= form.submit class: 'btn btn-success' %>
+  <div class="">
+    <%= form.submit "Save article", class: 'btn btn-success' %>
   </div>
 <% end %>
 <%# article.errors.each do |error| %>

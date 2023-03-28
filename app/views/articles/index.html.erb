@@ -26,20 +26,21 @@
           <td><%= article.title %></td>
           <td><%= article.created_at.strftime('%d/%m/%Y  %H:%m')%></td>
           <td class="d-flex justify-content-around">
-            <a href="/articles/<%= article.id %>" class="">
+            <a href="/articles/<%= article.id %>" class="btn">
               <i class="bi bi-eye-fill"></i>
             </a>
             <% if current_user == article.user %>
-              <a href="/articles/<%= article.id %>/edit" class="">
+              <a href="/articles/<%= article.id %>/edit" class="btn">
                 <i class="bi bi-pencil-fill"></i>
               </a>
-              <a href="" class="">
+              <%= button_to article_path(article.id), method: :delete, class: "btn " do%>
                 <i class="bi bi-trash-fill"></i>
-              </a>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+              <% end %>
+            </a>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>
