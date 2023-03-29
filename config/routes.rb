@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :categories
+
   devise_for :users, controllers: { registrations: 'users/registrations'}
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 # come definire le singole rotte
   # get "/articles",      to: "articles#index" 
   # get "/articles/:id",  to: "articles#show"
+  get "/chatroom",     to: "chatroom#index"
 
 # per create le rotte delle CRUD di un model
 
@@ -18,10 +19,12 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
-  
+  resources :categories
+  resources :messages
 
 
-  
+  mount ActionCable.server, at: '/cable'
+
 end
 
 # comando per vedere tutte le rotte

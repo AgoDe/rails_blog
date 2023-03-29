@@ -1,0 +1,10 @@
+<div id="<%= dom_id message %>">
+  <div class="input-group mb-2 w-50 <%= 'ms-5' if message.user == current_user %>">
+    <span class="input-group-text" id="basic-addon1" >
+      <%= message.user.username %>
+    </span>
+    <div class="form-control" aria-describedby="basic-addon1">
+        <%= message.body %>
+    </div>
+  </div>
+</div>

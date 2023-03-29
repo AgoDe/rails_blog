@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :currect_user, only: [:edit, :update, :destroy]
+  before_action :current_user, only: [:edit, :update, :destroy]
 
 
   def index
@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     @article = current_user.article.create(article_params)
     
     if @article.save
-      flash[:notice] = "Article was created succesfully"
+      flash[:notice] = "Article was created successfully"
       redirect_to @article
     else
       render :new, status: :unprocessable_entity
@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
 
   def destroy
    #  TODO: add a confirmation dialog
-   #  TODO: verifi key costraint with comment
+   #  TODO: verify key constraint with comment
   
     @article.destroy
 
@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :body, category_ids: [])
     end
 
-    def currect_user
+    def current_user
       @article = Article.find_by(id: params[:id])
       unless current_user.id == @article.user.id || current_user.admin?
         redirect_to articles_path, alert: "You are not authorized to perform this action"

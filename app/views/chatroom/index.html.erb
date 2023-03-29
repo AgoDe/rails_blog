@@ -1,0 +1,29 @@
+<div class="div-12 mb-5">
+  <h1>
+    Chatroom
+  </h1>
+  <hr>
+</div>
+
+<div class="col-8 chat_container">
+  <h3>Chat</h3>
+
+  <div class="border h-100 messages_box p-4">
+    <%= render @messages %>
+  </div>
+
+  <%= form_for(@message, html: {class: 'input-group mt-2', role: 'form'}, url: messages_path) do |form| %>
+  <%= form.text_field :body, class: 'form-control', placeholder: 'Enter a message' %>
+    <%= form.submit 'Send', class: 'btn btn-outline-info' %>
+  <% end %>
+
+</div>
+
+<div class="col-4 user_container">
+  <h3>Online Users</h3>
+  <div class="border h-100">
+
+  </div>
+
+
+</div>

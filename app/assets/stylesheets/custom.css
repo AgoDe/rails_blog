@@ -60,3 +60,14 @@
     overflow: hidden;
  }
 /* end of pagination */
+
+/* chatroom */
+
+.chat_container {
+    height: 500px;
+}
+
+.users_container {
+    height: 500px;
+}
+/* end of chatroom */
