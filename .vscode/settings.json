@@ -1,0 +1,8 @@
+{
+    "editor.cursorBlinking": "blink",
+    "editor.wordBreak": "normal",
+    "editor.cursorSmoothCaretAnimation": "off",
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLines": 0,
+    "editor.cursorWidth": 2
+}

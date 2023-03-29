@@ -1,26 +1,18 @@
+<%= render 'shared/errors', obj: @article %>
 <%= form_with model: @article do |form| %>
   <div class="mb-3">
     <%= form.label :title, class: 'form-label' %><br>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
   <div class="mb-3">
+    <%= form.label :category_id, class: 'form-label' %><br>
+    <%= form.collection_select(:category_ids, Category.all, :id, :name, { }, { class: 'form-select', multiple: true },) %>
+  </div>
+  <div class="mb-3">
     <%= form.label :body, class: 'form-label' %><br>
     <%= form.text_area :body, class: 'form-control' %><br>
   </div>
-  <div class="">
-    <%  if @article.errors.any? %>
-      <h4 class="text-danger">
-        The following errors prevented the article from being saved
-      </h4>
-      <ul class="">
-        <% @article.errors.full_messages.each do |message| %>
-          <li class="text-danger">
-            <%= message %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+
   <div class="">
     <%= form.submit "Save article", class: 'btn btn-success' %>
   </div>

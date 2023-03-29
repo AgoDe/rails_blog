@@ -6,25 +6,43 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
           <div>
             <h5 class="text-secondary">Article details</h5>
-            <h1>
-              <%= @article.title%>
-            </h1>
+
           </div>
           <div class="">
-            <a href="/articles" class="btn btn-primary">
+            <a href="/articles" class="btn btn-secondary">
               Back to articles
             </a>
-            <a href="/articles/<%= @article.id %>/edit" class="btn btn-success ml-5">
-              Edit
-            </a>
-            <%= button_to "Destroy", article_path(@article), method: :delete, class: 'btn btn-danger', form_class: 'd-inline-block' %>
           </div>
+
         </div>
       </div>
       <%# main %>
       <div class="col-12 col-lg-9 pe-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <div>
+            <h1>
+              <%= @article.title%>
+            </h1>
+
+            <div class="d-flex gap-1 mt-3">
+              <% if @article.categories.any? %>
+                <%= render @article.categories %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 justify-content-end">
+            <% if user_signed_in? && (@article.user == current_user || current_user.admin?) %>
+              <a href="/articles/<%= @article.id %>/edit" class="btn btn-success ml-5">
+                Edit
+              </a>
+              <%= button_to "Destroy", article_path(@article), method: :delete, class: 'btn btn-danger', form_class: 'd-inline-block' %>
+            <% end %>
+          </div>
+        </div>
         <%# article body %>
-        <p class="mb-5 fs-3">
+        <p class="mb-5 fs-4 fst-italic">
           <%= @article.body %>
         </p>
         <hr>
@@ -37,19 +55,27 @@
           </div>
         </div>
         <hr>
-        <h3 class="mt-5 mb-3">All comments:</h3>
+        <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
+          <h3 class="">All comments:</h3>
+          <%# add comments %>
+          <div class="col-12 col-lg-3 ps-4 text-center">
+            <% if user_signed_in? %>
+              <%= turbo_frame_tag "new_comment" do %>
+                <%= link_to "Write a comment", new_article_comment_path(@article.id), class: "btn btn-primary"  %>
+              <% end %>
+              <%= turbo_frame_tag "edit_comment" do %>
+              <% end %>
+            <% else %>
+              For comment this article, 
+              please <%= link_to "sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
+            <% end %>
+          </div>
+        </div>
         <div id="comments">
-          <%= render @article.comments %>
+          <%= render @article.comments.recent %>
         </div>
       </div>
-      <%# add comments %>
-      <div class="col-12 col-lg-3 ps-4">
-        <%= turbo_frame_tag "new_comment" do %>
-          <%= link_to "Write a comment", new_article_comment_path(@article.id), class: "btn btn-primary"  %>
-        <% end %>
-        <%= turbo_frame_tag "edit_comment" do %>
-        <% end %>
-      </div>
+
     </div>
   </div>
 </div>

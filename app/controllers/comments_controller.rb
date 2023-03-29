@@ -1,10 +1,9 @@
 class CommentsController < ApplicationController
 
     before_action :set_comment, only: [:edit, :update, :destroy]
-
     before_action :authenticate_user!
+    before_action :currect_user, only: [:edit, :update, :destroy]
 
-    before_action :currect_user
     def new
         @article = Article.find(params[:article_id])
         @comment = @article.comments.build
@@ -64,7 +63,7 @@ class CommentsController < ApplicationController
 
     def currect_user
         @comment = Comment.find_by(id: params[:id])
-        unless current_user.id == @comment.user.id
+        unless current_user.id == @comment.user.id || current_user.admin?
           redirect_to articles_path, alert: "You are not authorized to perform this action"
         end
       end

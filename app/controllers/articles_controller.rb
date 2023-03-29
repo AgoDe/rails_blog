@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
 
 
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   def show
@@ -43,6 +43,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+   #  TODO: add a confirmation dialog
+   #  TODO: verifi key costraint with comment
   
     @article.destroy
 
@@ -56,12 +58,12 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, category_ids: [])
     end
 
     def currect_user
       @article = Article.find_by(id: params[:id])
-      unless current_user.id == @article.user.id
+      unless current_user.id == @article.user.id || current_user.admin?
         redirect_to articles_path, alert: "You are not authorized to perform this action"
       end
     end

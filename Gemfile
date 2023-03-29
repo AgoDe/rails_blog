@@ -91,3 +91,6 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
 end
+
+gem 'will_paginate', '~> 3.3'
+gem 'rexml', require: false

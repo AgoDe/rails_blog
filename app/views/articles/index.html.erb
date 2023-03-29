@@ -2,9 +2,11 @@
   <div class="d-flex justify-content-between align-items-center">
     <h1>All Articles</h1>
     <div class="">
-      <a href="/articles/new" class="btn btn-primary">
-        New Article
-      </a>
+      <% if user_signed_in? %>
+        <a href="/articles/new" class="btn btn-primary">
+          New Article
+        </a>
+      <% end %>
     </div>
   </div>
   <hr>
@@ -29,7 +31,7 @@
             <a href="/articles/<%= article.id %>" class="btn">
               <i class="bi bi-eye-fill"></i>
             </a>
-            <% if current_user == article.user %>
+            <% if user_signed_in? && (current_user == article.user || current_user.admin?) %>
               <a href="/articles/<%= article.id %>/edit" class="btn">
                 <i class="bi bi-pencil-fill"></i>
               </a>
@@ -43,4 +45,6 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @posts %>
 </div>
