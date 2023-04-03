@@ -10,41 +10,8 @@
     </div>
   </div>
   <hr>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Date</th>
-        <th scope="col" class="text-center">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @articles.each do |article| %>
-        <tr>
-          <th scope="row">
-            <%= article.id %>
-          </th>
-          <td><%= article.title %></td>
-          <td><%= article.created_at.strftime('%d/%m/%Y  %H:%m')%></td>
-          <td class="d-flex justify-content-around">
-            <a href="/articles/<%= article.id %>" class="btn">
-              <i class="bi bi-eye-fill"></i>
-            </a>
-            <% if user_signed_in? && (current_user == article.user || current_user.admin?) %>
-              <a href="/articles/<%= article.id %>/edit" class="btn">
-                <i class="bi bi-pencil-fill"></i>
-              </a>
-              <%= button_to article_path(article.id), method: :delete, class: "btn " do%>
-                <i class="bi bi-trash-fill"></i>
-              <% end %>
-            </a>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= will_paginate @posts %>
+  <%= render @articles %>
+
+  <%= will_paginate @posts %>
 </div>

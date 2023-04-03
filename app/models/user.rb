@@ -14,5 +14,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { minimum: 3, maximum: 105 }
   validates :password, presence: true, length: { minimum: 6, maximum: 255 }
 
+  scope :all_except, ->(user) { where.not(id: user) }
+
+  after_create_commit { broadcast_append_to "users" }
 
 end

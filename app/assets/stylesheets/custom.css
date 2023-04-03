@@ -67,7 +67,40 @@
     height: 500px;
 }
 
+.chat_container .messages_box {
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-image: url(whatapp_background.jpg);
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .users_container {
     height: 500px;
 }
+
+.message_badge div{
+    background-color: white;
+    margin: 10px 0px;
+    padding: 5px 10px;
+    min-width: 200px;
+    max-width: 300px;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 6px -2px rgba(95,95,95,0.6); 
+    box-shadow: 1px 1px 6px -2px rgba(95,95,95,0.6);
+    overflow-wrap: break-word;
+    
+}
+
+.message_badge span {
+    font-size: 10px;
+    color: darkgray;
+    display: block;
+    margin-bottom: 3px;
+}
+
 /* end of chatroom */
+
+.action_box_column {
+    
+}

@@ -1,0 +1,42 @@
+<div class="card mb-2">
+  <div class="card-header">
+    <%= article.user.username %> - <%= time_ago_in_words(article.created_at) %> ago
+  </div>
+  <div class="card-body">
+
+    <div class="d-flex">
+
+      <div class="article_body flex-grow-1">
+        <h5 class="card-title">
+          <%= article.title %>
+          s</h5>
+        <p class="card-text"></p>
+        <div class="d-flex gap-1">
+          <% if article.categories.any? %>
+            <%= render article.categories %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class=" h-100 d-flex flex-column justify-content-between w-20">
+        <%= link_to article_path(article.id), class: "btn" do  %>
+          <i class="bi bi-eye-fill"></i>
+        <% end %>
+
+        <% if user_signed_in? && (current_user == article.user || current_user.admin?) %>
+
+          <%= link_to edit_article_path(article.id), class: 'btn' do %>
+            <i class="bi bi-pencil-fill"></i>
+          <% end %>
+
+          <%= button_to article_path(article.id), method: :delete, class: "btn " do%>
+            <i class="bi bi-trash-fill"></i>
+          <% end %>
+
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

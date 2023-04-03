@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :current_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :only_current_user, only: [:edit, :update, :destroy]
 
 
   def index
@@ -14,11 +14,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = current_user.article.build
+    @article = current_user.articles.build
   end
 
   def create
-    @article = current_user.article.create(article_params)
+    @article = current_user.articles.create(article_params)
     
     if @article.save
       flash[:notice] = "Article was created successfully"
@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :body, category_ids: [])
     end
 
-    def current_user
+    def only_current_user
       @article = Article.find_by(id: params[:id])
       unless current_user.id == @article.user.id || current_user.admin?
         redirect_to articles_path, alert: "You are not authorized to perform this action"

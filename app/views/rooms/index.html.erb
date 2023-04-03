@@ -1,0 +1,69 @@
+<div class="div-12 mb-5">
+  <h1>
+    Chatrooms
+  </h1>
+  <hr>
+</div>
+
+<div class="col-4 user_container">
+  <h3>Rooms</h3>
+  <%= form_with(model: @room, remote: true, class: 'input-group my-2 ') do |form| %>
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Create new room' %>
+    <%= form.submit 'Create', data: {disable_with: false }, class: 'btn btn-outline-info' %>
+  <% end %>
+  <div class="border p-4">
+
+    <%= turbo_stream_from "rooms" %>
+    <div id="rooms">
+      <%= render @rooms %>
+    </div>
+
+  </div>
+
+  <h3 class="mt-5">Online Users</h3>
+  <div class="border p-4">
+
+    <%= turbo_stream_from "users" %>
+    <div id="users">
+      <%= render @users %>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="col-8 chat_container">
+  <% if @single_room != nil%>
+    <h3>
+      <% if @user != nil %>
+        <%= @user.username %>
+      <% else %>
+        <%= @single_room.name %>
+      <% end %>
+
+    </h3>
+
+    <div class="border h-100 messages_box p-4" id="messages-box">
+      <%= turbo_stream_from @single_room %>
+      <div id="messages">
+        <%= render @messages %>
+      </div>
+    </div>
+
+    <%= form_with(model: [@single_room, @message], remote: true, class: 'input-group mt-2', id: 'message-form') do |form| %>
+      <%= form.text_field :body, class: 'form-control', autocomplete: 'off', placeholder: 'Enter a message' %>
+      <%= form.submit 'Send', data: { disable_with: false }, class: 'btn btn-outline-info' %>
+    <% end %>
+
+  <% end %>
+</div>
+
+<style>
+  <%= ".msg-user-#{current_user.id}"%> {
+    display: flex;
+    justify-content: flex-end;
+  }
+  <%= ".msg-user-#{current_user.id}"%> div {
+    background-color: #dcf8c6;
+  }
+</style>

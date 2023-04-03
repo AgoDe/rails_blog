@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
 
   devise_for :users, controllers: { registrations: 'users/registrations'}
 
@@ -7,28 +8,19 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
-# come definire le singole rotte
-  # get "/articles",      to: "articles#index" 
-  # get "/articles/:id",  to: "articles#show"
-  get "/chatroom",     to: "chatroom#index"
 
-# per create le rotte delle CRUD di un model
-
-  
   resources :users, only: [:index, :show]
   resources :articles do
     resources :comments
   end
   resources :categories
-  resources :messages
+  resources :rooms do
+    resources :messages
+  end
 
-
-  mount ActionCable.server, at: '/cable'
 
 end
 
-# comando per vedere tutte le rotte
-# bin/rails routes
 
 
 # URL helper

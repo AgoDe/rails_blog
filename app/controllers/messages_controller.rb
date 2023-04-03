@@ -21,11 +21,8 @@ class MessagesController < ApplicationController
 
   # POST /messages or /messages.json
   def create
-    message = current_user.messages.build(message_params)
+    @message = current_user.messages.create(body: message_params[:body], room_id: params[:room_id])
 
-    if message.save
-      ActionCable.server.broadcast "chatroom_channel", { message: message.body }
-    end
   end
 
   # PATCH/PUT /messages/1 or /messages/1.json
